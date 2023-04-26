@@ -7,3 +7,4 @@ pam_beesly = Funcionario("Pam Beesly", "Recepcionista")
 michael_scott = Gerente("Michael Scott", "Gerente Regional", "Scranton")
 
 print(pam_beesly.get_nome())
+
