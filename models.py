@@ -1,6 +1,6 @@
 class Personagem:
 
-    def __init__(self, nome, cargo, idade, escritorio, nacionalidade, relacionamentos=dict()):
+    def __init__(self, nome, cargo, idade, escritorio, nacionalidade):
         self._nome = nome
         self._cargo = cargo
         self._idade = idade
@@ -8,8 +8,8 @@ class Personagem:
         self._nacionalidade = "Estadunidense"
         self._numero_episodios = 0
         self._link_dunderpedia = ""    
-        self._participacoes = {}
-        self._relacionamentos = relacionamentos
+        self._participacoes = dict()
+        self._relacionamentos = dict()
         self._filhos = []
         self._familiares = {}
 
@@ -18,12 +18,13 @@ class Personagem:
         info += f"Idade: {self._idade}\n"
         info += f"Cargo: {self._cargo}\n"
         info += f"Relacionamentos:\n"
-        for personagem, tipo_relacionamento in self._relacionamentos.items():
-            info += f"- {personagem._nome} ({tipo_relacionamento})\n"
+        if len(self._relacionamentos):
+            for personagem, tipo_relacionamento in self._relacionamentos.items():
+                info += f"- {personagem._nome} ({tipo_relacionamento})\n"
         return info
     
     def verifica_relacionamento(self, personagem):
-        if personagem._nome in self._relacionamentos:
+        if personagem in self._relacionamentos:
             return True
         else:
             return False
@@ -32,16 +33,30 @@ class Personagem:
         if not isinstance(personagem, Personagem):
             raise TypeError("O personagem deve ser uma instância da classe Personagem")
 
-        _personagem = personagem._nome
-        _tipo_relacionamento = tipo_relacionamento
-
         if self.verifica_relacionamento(personagem):
             if atualiza_relacionamento:
-                self._relacionamentos[_personagem] = _tipo_relacionamento
+                self._relacionamentos.update({personagem: tipo_relacionamento})
             else:
                 raise ValueError("O relacionamento já existe, definir atualiza_relacionamento=True para atualizar o relacionamento")
         else:
-            self._relacionamentos[_personagem] = _tipo_relacionamento
+            self._relacionamentos[personagem] = tipo_relacionamento
+
+    def atualiza_informacoes(self, nome=None, cargo=None, idade=None, escritorio=None):
+        if nome:
+            self._nome = nome
+        if cargo:
+            self._cargo = cargo
+        if idade:
+            self._idade = idade
+        if escritorio:
+            self._escritorio = escritorio
+    
+    def get_relacionamentos(self):
+        info = f"Relacionamentos:"
+        for objeto_personagem, relacionamento in self._relacionamentos.items():
+            info += " {} : {}, ".format(objeto_personagem._nome, relacionamento)
+        return info
+        
 
 class Episodio(Personagem):
     
