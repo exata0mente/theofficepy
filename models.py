@@ -12,3 +12,34 @@ class Personagem:
         print("Idade:", self.idade)
         print("Escritório:", self.escritorio)
         print("Frase Famosa:", self.frase_famosa)
+
+class Funcionario:
+    def __init__(self, nome, cargo):
+        self.nome = nome
+        self.cargo = cargo
+
+    def imprimir_info(self):
+        print("Nome:", self.nome)
+        print("Cargo:", self.cargo)
+
+class Gerente(Funcionario):
+    def __init__(self, nome, cargo, departamento):
+        super().__init__(nome, cargo)
+        self.departamento = departamento
+
+    def imprimir_info(self):
+        super().imprimir_info()
+        print("Departamento:", self.departamento)
+
+class Episodio:
+    def __init__(self, numero, titulo, diretor, temporada):
+        self.numero = numero
+        self.titulo = titulo
+        self.diretor = diretor
+        self.temporada = temporada
+
+    def imprimir_info(self):
+        print("Episódio: {numero} - {titulo}".format(numero=self.numero, titulo=self.titulo))
+        print("Título:", self.titulo)
+        print("Diretor:", self.diretor)
+        print("Personagens:")
