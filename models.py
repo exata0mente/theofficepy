@@ -15,12 +15,15 @@ class Personagem:
 
 class Funcionario:
     def __init__(self, nome, cargo):
-        self.nome = nome
-        self.cargo = cargo
+        self._nome = nome
+        self._cargo = cargo
 
     def imprimir_info(self):
         print("Nome:", self.nome)
         print("Cargo:", self.cargo)
+    
+    def get_nome(self):
+        return self._nome
 
 class Gerente(Funcionario):
     def __init__(self, nome, cargo, departamento):

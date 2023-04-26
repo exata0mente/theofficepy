@@ -6,11 +6,4 @@ from models import *
 pam_beesly = Funcionario("Pam Beesly", "Recepcionista")
 michael_scott = Gerente("Michael Scott", "Gerente Regional", "Scranton")
 
-def imprimir_cargo(funcionario):
-    print("Cargo:", funcionario.cargo)	
-
-imprimir_cargo(pam_beesly)
-imprimir_cargo(michael_scott)
-
-episodio = Episodio(numero=1, titulo="Pilot", diretor="Ken Kwapis", temporada=1)
-
+print(pam_beesly.get_nome())
