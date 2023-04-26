@@ -1,11 +1,10 @@
 class Personagem:
-
-    def __init__(self, nome, cargo, idade, escritorio, nacionalidade):
+    def __init__(self, nome, cargo, idade, escritorio, nacionalidade=None):
         self._nome = nome
         self._cargo = cargo
         self._idade = idade
         self._escritorio = escritorio
-        self._nacionalidade = "Estadunidense"
+        self._nacionalidade = nacionalidade
         self._numero_episodios = 0
         self._link_dunderpedia = ""    
         self._participacoes = dict()
@@ -59,7 +58,7 @@ class Personagem:
         
 
 class Episodio(Personagem):
-    
+ 
         def __init__(self, nome, temporada, numero, diretor, roteirista, data, link_imdb="", link_dunderpedia="", participacoes=list()):
             self._nome = nome
             self._temporada = temporada
@@ -83,3 +82,25 @@ class Episodio(Personagem):
             for personagem_episodio in nome_personagens:
                 info += f"- {personagem_episodio}\n"
             return info
+        
+class TheOffice:
+    def __init__(self):
+        self.personagens = []
+
+    def adicionar_personagem(self, nome, idade, cargo, relacionamentos=dict()):
+        novo_personagem = Personagem(nome, idade, cargo, relacionamentos)
+        self.personagens.append(novo_personagem)
+
+    def remover_personagem(self, nome):
+        for personagem in self.personagens:
+            if personagem.nome == nome:
+                self.personagens.remove(personagem)
+                return f"Personagem {nome} removido com sucesso!"
+        return f"Personagem {nome} não encontrado no sistema."
+    
+    def get_personagens(self):
+        info = "Personagens:\n"
+        for personagem in self.personagens:
+            info += f"- {personagem._nome}\n"
+        return info
+
